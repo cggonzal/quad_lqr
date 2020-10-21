@@ -11,7 +11,7 @@ def lqr(A,B,Q,R):
 
 x = 0
 y = 0
-theta = 0
+theta = 1.5
 x_dot = 0
 y_dot = 0
 theta_dot = 0
@@ -42,7 +42,7 @@ R = np.eye(2)
 
 K = lqr(A,B,Q,R)
 
-dt = 0.01
+dt = 0.001
 
 current_time = 0
 time_vals = []
@@ -50,10 +50,10 @@ x_vals = []
 y_vals = []
 theta_vals = []
 
-stable_state = np.array([3,3,0,0,0,0]).reshape((6,1))
+stable_state = np.array([0,1,0,0,0,0]).reshape((6,1))
 
 # runge kutta
-for i in range(1000):
+for i in range(10000):
     
     time_vals.append(current_time)
     x_vals.append(X[0,0])
@@ -70,10 +70,12 @@ for i in range(1000):
     X = X + (1/6)*(k1 + 2*k2 + 2*k3 + k4)
     current_time = current_time + dt
 
-plt.subplot(311)
+plt.subplot(411)
 plt.plot(time_vals, x_vals)
-plt.subplot(312)
+plt.subplot(412)
 plt.plot(time_vals, y_vals)
-plt.subplot(313)
+plt.subplot(413)
 plt.plot(time_vals, theta_vals)
+plt.subplot(414)
+plt.plot(x_vals, y_vals)
 plt.show()
